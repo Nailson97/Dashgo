@@ -1,4 +1,4 @@
-import { Box, Flex, SimpleGrid, Text, theme } from "@chakra-ui/react";
+import { Box, Flex, SimpleGrid, Text, theme, useBreakpointValue } from "@chakra-ui/react";
 import { ApexOptions } from "apexcharts";
 import { Header } from "../components/Form/Header";
 
@@ -65,6 +65,11 @@ const series = [
 ];
 
 export default function Dashboard() {
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    lg: true
+  })
+  
   return (
     <Flex direction="column" h="100vh">
       <Header />
@@ -81,13 +86,13 @@ export default function Dashboard() {
             <Text fontSize="lg" mb="4">
               Inscritos da semana
             </Text>
-            <Chart options={options} series={series} type="area" height={160} width={300} />
+            <Chart options={options} series={series} type="area" height={160} width={isWideVersion ? 400 : 300} />
           </Box>
           <Box p={["6", "8"]} bg="gray.800" borderRadius={8} pb="4">
             <Text fontSize="lg" mb="4">
               Taxa de abertura
             </Text>
-            <Chart options={options} series={series} type="area" height={160} width={300}/>
+            <Chart options={options} series={series} type="area" height={160} width={isWideVersion ? 400 : 300}/>
           </Box>
         </SimpleGrid>
       </Flex>

@@ -1,4 +1,6 @@
 import { Box,Divider,Flex, Heading, SimpleGrid, Stack, HStack, Button, useBreakpointValue } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
+import Link from "next/link";
 import { Header } from "../../components/Form/Header";
 import { Sidebar } from "../../components/Form/Header/Sidebar";
 import { Input } from "../../components/Form/Input";
@@ -8,7 +10,7 @@ import { Input } from "../../components/Form/Input";
       base: false,
       lg: true
     })
-
+   
     return (
       <Box>
         <Header />
@@ -34,7 +36,7 @@ import { Input } from "../../components/Form/Input";
 
             <Flex mt="8" justify="flex-end">
                <HStack spacing="4">
-                 <Button colorScheme="whiteAlpha">Cancelar</Button>
+                   <Button as={Link} colorScheme="whiteAlpha" href="/users">Cancelar</Button>
                  <Button colorScheme="pink">Salvar</Button>
                </HStack>
             </Flex>
