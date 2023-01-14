@@ -21,8 +21,6 @@ export default function Signin() {
 
   const errors = formState.errors
 
-  console.log(errors)
-
   const handleSignIn: SubmitHandler<FieldValues> = async (data) => {
     console.log(data)
   }
