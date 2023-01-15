@@ -35,7 +35,7 @@ const createUserFormSchema = yup.object().shape({
 
       console.log(data)
     }
-
+    
     const isWideVersion = useBreakpointValue({
       base: false,
       lg: true
