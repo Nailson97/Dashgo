@@ -21,13 +21,22 @@ import { Header } from "../../components/Form/Header";
 import { Sidebar } from "../../components/Form/Header/Sidebar";
 import { Pagination } from "../../components/Pagination";
 import { useQuery } from "react-query";
+import { number } from "yup/lib/locale";
+
+interface userProps {
+  id: number,
+  name: string,
+  email: string,
+  createdAt: string
+}
 
 export default function UserList() {
   const { data, isLoading, error } = useQuery("users", async () => {
     const response = await fetch("http://localhost:3000/api/users");
     const data = await response.json();
 
-    const users = data.users.map(user => {
+   
+    const users = data.users.map((user: userProps ) => {
       return {
         id: user.id,
         name: user.name,
@@ -95,7 +104,7 @@ export default function UserList() {
                 </Thead>
                 <Tbody>
                  
-                {data.map(user => (
+                {data.map((user: userProps ) => (
                     <Tr key={user.id}>
                     <Td px={["4", "4", "6"]}>
                       <Checkbox colorScheme="pink" />
