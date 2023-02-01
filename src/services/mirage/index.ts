@@ -19,10 +19,10 @@ export function makeServer() {
           return `User ${i + 1}`
         },
         email() {
-         return {email: faker.internet.email().toLocaleLowerCase()}
+         return faker.internet.email().toLocaleLowerCase()
         },
         createdAt() {
-          return {registeredAt: faker.date.recent(10)}
+          return faker.date.recent(10)
         }
       })
     },
