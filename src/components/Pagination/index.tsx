@@ -64,27 +64,27 @@ export function Pagination({
       <Stack direction="row" spacing="2">
         {currentPage > 1 + siblinsCount && (
           <>
-            <PaginationItem number={1} />
+            <PaginationItem number={1} onPageChange={onPageChange} />
             {currentPage > 2 + siblinsCount && <Text color='gray.300' width="8" text-align="center">...</Text>}
           </>
         )}
 
         {previousPage.length > 0 &&
           previousPage.map((page) => {
-            return <PaginationItem number={page} key={page} />;
+            return <PaginationItem onPageChange={onPageChange} number={page} key={page} />;
           })}
 
-        <PaginationItem number={currentPage} isCurrent />
+        <PaginationItem number={currentPage} onPageChange={onPageChange} isCurrent />
 
         {nextPages.length > 0 &&
           nextPages.map((page) => {
-            return <PaginationItem number={page} key={page} />;
+            return <PaginationItem number={page} key={page} onPageChange={onPageChange} />;
           })}
 
         {currentPage + siblinsCount < lastPage && (
           <>
             {currentPage + 1 + siblinsCount < lastPage && <Text color="gray.300" width="8" text-align="center">...</Text>}
-            <PaginationItem number={lastPage} />
+            <PaginationItem number={lastPage} onPageChange={onPageChange} />
           </>
         )}
       </Stack>
