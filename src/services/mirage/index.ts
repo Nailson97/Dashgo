@@ -1,6 +1,5 @@
 import { createServer, Factory, Model, Response} from 'miragejs'
 import { faker } from '@faker-js/faker';
-import { string } from 'yup';
 
 type user = {
   name: string
@@ -53,6 +52,7 @@ export function makeServer() {
         )
       })
 
+      this.get('/users/:id')
       this.post('/users')
 
       this.namespace = ''

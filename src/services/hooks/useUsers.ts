@@ -41,9 +41,9 @@ type userProps = {
     }
   }
 
-export function useUsers(page: number) {
+  export function useUsers(page: number) {
     return useQuery<getUsers>(['users', page] , () => getUsers(page), {
-        staleTime: 1000 * 5,
+      staleTime: 1000 * 60 * 10
       })
     
 }

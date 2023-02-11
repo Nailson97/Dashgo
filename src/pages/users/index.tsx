@@ -14,6 +14,7 @@ import {
   Text,
   useBreakpointValue,
   Spinner,
+  LinkBox,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { useState } from "react";
@@ -21,7 +22,9 @@ import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { Header } from "../../components/Form/Header";
 import { Sidebar } from "../../components/Form/Header/Sidebar";
 import { Pagination } from "../../components/Pagination";
+import { api } from "../../services/api";
 import { useUsers } from "../../services/hooks/useUsers";
+import { queryClient } from "../../services/queryClient";
 
 interface userProps {
   id: string,
@@ -34,12 +37,20 @@ export default function UserList() {
   const [page, setPage] = useState(1)
   const { data, isLoading, isFetching, error } = useUsers(page)
 
-  console.log(page)
-
   const isWideVersion = useBreakpointValue({
     base: false,
     lg: true,
   });
+
+  async function handlePrefectUser(userId: number) {
+    await queryClient.prefetchQuery(['user', userId], async () => {
+      const response = await api.get(`users/${userId}`)
+
+      return response.data
+    }, {
+      staleTime: 1000 * 60 * 10
+    })
+  }
 
   return (
     <Box>
@@ -95,7 +106,9 @@ export default function UserList() {
                     </Td>
                     <Td>
                       <Box>
-                        <Text fontWeight="bold">{user.name}</Text>
+                        <LinkBox color="purple.400" onMouseEnter={() => handlePrefectUser(Number(user.id))}>
+                          <Text fontWeight="bold">{user.name}</Text>
+                        </LinkBox>
                         <Text fontSize="sm" color="gray.300">{user.email}</Text>
                       </Box>
                     </Td>
@@ -125,4 +138,4 @@ export default function UserList() {
       </Flex>
     </Box>
   );
-}
+ }
