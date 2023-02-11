@@ -42,7 +42,7 @@ export default function UserList() {
     lg: true,
   });
 
-  async function handlePrefectUser(userId: number) {
+  async function handlePrefectUser(userId: string) {
     await queryClient.prefetchQuery(['user', userId], async () => {
       const response = await api.get(`users/${userId}`)
 
@@ -106,7 +106,7 @@ export default function UserList() {
                     </Td>
                     <Td>
                       <Box>
-                        <LinkBox color="purple.400" onMouseEnter={() => handlePrefectUser(Number(user.id))}>
+                        <LinkBox color="purple.400" onMouseEnter={() => handlePrefectUser(user.id)}>
                           <Text fontWeight="bold">{user.name}</Text>
                         </LinkBox>
                         <Text fontSize="sm" color="gray.300">{user.email}</Text>
